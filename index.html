@@ -7,7 +7,7 @@
 <title>ELF | English Learning Facility</title>
 <meta name="description" content="ELF (English Learning Facility) offers friendly English classes for all levels with flexible schedules, speaking practice, and supportive teachers.">
 <meta name="keywords" content="English classes, English learning, Somali English classes, speaking practice, beginner English, advanced English, ELF">
-<link rel="canonical" href="https://elf.example.com/">
+<link rel="canonical" href="https://raazimtech.github.io/ELF/">
 <link rel="icon" type="image/png" sizes="64x64" href="./logo3.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./logo3.png">
 <link rel="apple-touch-icon" sizes="180x180" href="./logo3.png">
@@ -438,8 +438,14 @@
     e.preventDefault();
     const form=e.target;
     const data=new FormData(form);
-    const name=data.get('name');
-    alert(`Thank you, ${name}! We will contact you soon.`);
+    const name=(data.get('name')||'').trim() || (currentLang==='so'?'saaxiib':'friend');
+    const msg=(data.get('message')||'').trim();
+    const text = currentLang === 'so'
+      ? `Salaan ELF, waxaan ahay ${name}. Waxaan rabaa: ${msg}`
+      : `Hi ELF, I'm ${name}. I need: ${msg}`;
+    const waUrl = `https://wa.me/252636581295?text=${encodeURIComponent(text)}`;
+    window.open(waUrl,'_blank');
+    alert(currentLang==='so' ? 'Waxaan furay WhatsApp si aad fariinta u dirto.' : 'Opening WhatsApp so you can send your note.');
     form.reset();
   }
 
@@ -448,7 +454,7 @@
     "@context":"https://schema.org",
     "@type":"Organization",
     "name":"ELF (English Learning Facility)",
-    "url":"https://elf.example.com/",
+    "url":"https://raazimtech.github.io/ELF/",
     "logo":"./logo3.png",
     "description":"Friendly English classes for all levels with flexible timing and speaking practice.",
     "contactPoint":[{
